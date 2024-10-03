@@ -1,0 +1,126 @@
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+
+export default function App() {
+  const [v1, setV1] = useState('');
+  const [v2, setV2] = useState('');
+  const [masse, setMasse] = useState('');
+  const [V, setV] = useState('');
+  const [result, setResult] = useState('');
+
+  const calculateResult = () => {
+    const num1 = parseFloat(v1);
+    const num2 = parseFloat(v2);
+    if (!isNaN(num1) && !isNaN(num2)) {
+      setV((num2-num1).toString());
+      setResult((masse/(num2-num1)).toString());
+    } else {
+      setResult('Error');
+    }
+  };
+
+  const clearInputs = () => {
+    setV1('');
+    setV2('');
+    setResult('');
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>masse:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setMasse}
+          value={masse}
+          keyboardType="numeric"
+          placeholder="Enter masse"
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>V1:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setV1}
+          value={v1}
+          keyboardType="numeric"
+          placeholder="Enter V1"
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>V2:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setV2}
+          value={v2}
+          keyboardType="numeric"
+          placeholder="Enter V2"
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={calculateResult}>
+          <Text style={styles.buttonText}>Calculate</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={clearInputs}>
+          <Text style={styles.buttonText}>Clear</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.resultContainer}>
+        <Text style={styles.resultLabel}>V: {V}</Text>
+        <Text style={styles.resultLabel}>Result: {result}</Text>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+    padding: 20,
+    justifyContent: 'center',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 18,
+    marginRight: 10,
+    width: 30,
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    fontSize: 18,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  resultContainer: {
+    alignItems: 'center',
+  },
+  resultLabel: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  resultText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+});

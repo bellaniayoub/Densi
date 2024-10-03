@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import CalculatorScreen from './CalculatorScreen';
+import HistoryScreen from './HistoryScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Calculator">
+        <Stack.Screen 
+          name="Calculator" 
+          component={CalculatorScreen} 
+          options={{ title: 'Densi' }}
+        />
+        <Stack.Screen 
+          name="History" 
+          component={HistoryScreen} 
+          options={{ title: 'Historique des calculs' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );}
